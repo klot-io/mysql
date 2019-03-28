@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: db
+  namespace: mysql-klot-io
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+      nodeSelector:
+        mysql.klot.io/storage: enabled
+      volumes:
+      - name: mysql
+        hostPath:
+          path: /home/pi/storage/mysql.klot.io
+      containers:
+      - name: mysql
+        image: klotio/mysql:0.1
+        volumeMounts:
+        - name: mysql
+          mountPath: /var/lib/mysql.klot.io
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: mysql-klot-io
+  labels:
+    app: db
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  clusterIP: None
+  selector:
+    app: db

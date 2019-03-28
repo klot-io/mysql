@@ -1,0 +1,22 @@
+apiVersion: klot.io/v1
+kind: App
+metadata:
+  name: mysql.klot.io
+  description: MySQL Server - Kloud of Things I/O
+spec:
+  source:
+    site: github.com
+    repo: klot-io/mysql
+  manifests:
+  - path: kubernetes/namespace.yaml
+  - path: kubernetes/daemon.yaml
+  labels:
+  - name: storage
+    description: Required to place MySQL
+    value: enabled
+    master: true
+  settings:
+  - name: mysql
+    version: "5.5"
+    host: db.mysql-klot-io
+    port: 3306
