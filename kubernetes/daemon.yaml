@@ -35,14 +35,13 @@ kind: Service
 metadata:
   name: db
   namespace: mysql-klot-io
-  labels:
-    app: db
 spec:
-  type: ClusterIP
-  ports:
-  - port: 3306
-    protocol: TCP
-    targetPort: 3306
-  clusterIP: None
   selector:
     app: db
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: mysql
+    port: 3306
+    protocol: TCP
+    targetPort: 3306

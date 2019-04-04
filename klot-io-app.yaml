@@ -15,8 +15,10 @@ spec:
     description: Required to place MySQL
     value: enabled
     master: true
-  settings:
-  - name: mysql
+  publish:
+  - service:
+      name: db
+      namespace: mysql-klot-io
+      port: mysql
     version: "5.5"
-    host: db.mysql-klot-io
-    port: 3306
+    protocol: mysql

@@ -34,6 +34,6 @@ update:
 	kubectl replace -f kubernetes/daemon.yaml
 
 remove:
-	kubectl delete -f kubernetes/namespace.yaml
+	-kubectl delete -f kubernetes/namespace.yaml
 
 reset: remove install
