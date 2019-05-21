@@ -2,7 +2,7 @@ ACCOUNT=klotio
 IMAGE=mysql
 VERSION?=0.1
 NAME=$(IMAGE)-$(ACCOUNT)
-NETWORK=klot-io
+NETWORK=klot.io
 VOLUMES=-v ${PWD}/data:/var/lib/mysql
 ENVIRONMENT=-e MYSQL_ALLOW_EMPTY_PASSWORD='yes'
 PORT=3306
