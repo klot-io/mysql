@@ -22,7 +22,7 @@ shell: network
 	docker run -it --rm --name=$(NAME) --network=$(NETWORK) $(VOLUMES) $(ENVIRONMENT) $(ACCOUNT)/$(IMAGE):$(VERSION) sh
 
 start: network
-	docker run -d --name=$(NAME) --network=$(NETWORK) $(VOLUMES) $(ENVIRONMENT) -p 127.0.0.1:$(PORT):$(PORT) $(ACCOUNT)/$(IMAGE):$(VERSION)
+	docker run -d --name=$(NAME) --network=$(NETWORK) $(VOLUMES) $(ENVIRONMENT) -p 127.0.0.1:$(PORT):$(PORT) --expose=$(PORT) $(ACCOUNT)/$(IMAGE):$(VERSION)
 
 stop:
 	docker rm -f $(NAME)
