@@ -15,10 +15,3 @@ spec:
     description: Required to place MySQL
     value: enabled
     master: true
-  publish:
-  - service:
-      name: db
-      namespace: mysql-klot-io
-      port: mysql
-    version: "5.5"
-    protocol: mysql
