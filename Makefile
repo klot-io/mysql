@@ -32,11 +32,11 @@ push:
 
 install:
 	kubectl create -f kubernetes/namespace.yaml
-	kubectl create -f kubernetes/daemon.yaml
+	kubectl create -f kubernetes/db.yaml
 
 update:
 	kubectl replace -f kubernetes/namespace.yaml
-	kubectl replace -f kubernetes/daemon.yaml
+	kubectl replace -f kubernetes/db.yaml
 
 remove:
 	-kubectl delete -f kubernetes/namespace.yaml

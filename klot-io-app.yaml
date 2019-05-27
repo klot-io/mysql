@@ -9,7 +9,7 @@ spec:
     repo: klot-io/mysql
   manifests:
   - path: kubernetes/namespace.yaml
-  - path: kubernetes/daemon.yaml
+  - path: kubernetes/db.yaml
   labels:
   - name: storage
     description: Required to place MySQL
