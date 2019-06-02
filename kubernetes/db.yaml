@@ -27,6 +27,9 @@ spec:
       containers:
       - name: mysql
         image: klotio/mysql:0.1
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: 'yes'
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
