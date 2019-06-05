@@ -7,8 +7,8 @@ spec:
   source:
     site: github.com
     repo: klot-io/mysql
+  namespace: mysql-klot-io
   manifests:
-  - path: kubernetes/namespace.yaml
   - path: kubernetes/db.yaml
   labels:
   - name: storage
