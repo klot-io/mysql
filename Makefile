@@ -2,6 +2,7 @@ ACCOUNT=klotio
 IMAGE=mysql
 VERSION?=0.1
 NAME=$(IMAGE)-$(ACCOUNT)
+NAMESPACE=mysql-klot-io
 NETWORK=klot.io
 VOLUMES=-v ${PWD}/data:/var/lib/mysql
 ENVIRONMENT=-e MYSQL_ALLOW_EMPTY_PASSWORD='yes'
@@ -43,6 +44,9 @@ remove:
 	-kubectl delete -f kubernetes/namespace.yaml
 
 reset: remove install
+
+forward:
+	kubectl -n $(NAMESPACE) port-forward service/db $(PORT):$(PORT)
 
 tag:
 	-git tag -a "v$(VERSION)" -m "Version $(VERSION)"
