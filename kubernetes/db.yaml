@@ -20,10 +20,6 @@ spec:
         key: node-role.kubernetes.io/master
       nodeSelector:
         mysql.klot.io/storage: enabled
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       volumes:
       - name: mysql
         hostPath:
