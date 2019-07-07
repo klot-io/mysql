@@ -2,11 +2,9 @@ apiVersion: klot.io/v1
 kind: App
 metadata:
   name: mysql.klot.io
+  version: v0.1
   description: MySQL Server - Kloud of Things I/O
 spec:
-  source:
-    site: github.com
-    repo: klot-io/mysql
   namespace: mysql-klot-io
   manifests:
   - path: kubernetes/namespace.yaml
