@@ -8,7 +8,7 @@ VOLUMES=-v ${PWD}/data:/var/lib/mysql
 ENVIRONMENT=-e MYSQL_ALLOW_EMPTY_PASSWORD='yes'
 PORT=3306
 
-.PHONY: cross build network shell start stop push install update remove reset tag
+.PHONY: cross build network shell start stop push install update remove reset tag untag
 
 cross:
 	docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -51,3 +51,7 @@ forward:
 tag:
 	-git tag -a "v$(VERSION)" -m "Version $(VERSION)"
 	git push origin --tags
+
+untag:
+	-git tag -d "v$(VERSION)"
+	git push origin ":refs/tags/v$(VERSION)"
