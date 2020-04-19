@@ -1,16 +1,14 @@
 apiVersion: klot.io/v1
-kind: App
+kind: KlotIOApp
 metadata:
   name: mysql.klot.io
-  version: v0.1
-  description: MySQL Server - Kloud of Things I/O
 spec:
   namespace: mysql-klot-io
+  description: MySQL Server - Kloud of Things I/O
   manifests:
   - path: kubernetes/namespace.yaml
   - path: kubernetes/db.yaml
-  labels:
+  settings:
   - name: storage
     description: Required to place MySQL
-    value: enabled
-    master: true
+    node: enabled

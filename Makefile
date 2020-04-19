@@ -1,6 +1,6 @@
 ACCOUNT=klotio
 IMAGE=mysql
-VERSION?=0.1
+VERSION?=0.2
 NAME=$(IMAGE)-$(ACCOUNT)
 NAMESPACE=mysql-klot-io
 NETWORK=klot.io
