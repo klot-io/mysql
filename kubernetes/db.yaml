@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
-  namespace: mysql-klot-io
+  namespace: mysql
   labels:
     app: db
 spec:
@@ -42,7 +42,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: db
-  namespace: mysql-klot-io
+  namespace: mysql
 spec:
   selector:
     app: db
