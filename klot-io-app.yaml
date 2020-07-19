@@ -3,10 +3,9 @@ kind: KlotIOApp
 metadata:
   name: mysql.klot.io
 spec:
-  namespace: mysql-klot-io
+  namespace: mysql
   description: MySQL Server - Kloud of Things I/O
   manifests:
-  - path: kubernetes/namespace.yaml
   - path: kubernetes/db.yaml
   settings:
   - name: storage
