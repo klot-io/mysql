@@ -24,6 +24,7 @@ spec:
       - name: mysql
         hostPath:
           path: /home/pi/storage/mysql.klot.io
+          type: Directory
       containers:
       - name: mysql
         image: klotio/mysql:0.3

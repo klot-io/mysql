@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: mysql
+spec:
+  template:
+    spec:
+      volumes:
+      - name: mysql
+      containers:
+      - name: mysql
+        image: mysql-klot-io
+        imagePullPolicy: Never

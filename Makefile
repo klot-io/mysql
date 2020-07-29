@@ -3,12 +3,11 @@ IMAGE=mysql
 VERSION?=0.3
 NAME=$(IMAGE)-$(ACCOUNT)
 NAMESPACE=mysql
-NETWORK=klot.io
 VOLUMES=-v ${PWD}/data:/var/lib/mysql
 ENVIRONMENT=-e MYSQL_ALLOW_EMPTY_PASSWORD='yes'
-PORT=3306
+TILT_PORT=23306
 
-.PHONY: cross build network shell start stop push install update remove reset tag untag
+.PHONY: cross build shell up down push install update remove reset tag untag
 
 cross:
 	docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -16,17 +15,19 @@ cross:
 build:
 	docker build . -t $(ACCOUNT)/$(IMAGE):$(VERSION)
 
-network:
-	-docker network create $(NETWORK)
+shell:
+	docker run -it --rm --name=$(NAME) $(VOLUMES) $(ENVIRONMENT) $(ACCOUNT)/$(IMAGE):$(VERSION) sh
 
-shell: network
-	docker run -it --rm --name=$(NAME) --network=$(NETWORK) $(VOLUMES) $(ENVIRONMENT) $(ACCOUNT)/$(IMAGE):$(VERSION) sh
+up:
+	mkdir -p data
+	echo "- op: replace\n  path: /spec/template/spec/volumes/0/hostPath/path\n  value: $(PWD)/data" > tilt/data.yaml
+	kubectx docker-desktop
+	-kubectl label node docker-desktop mysql.klot.io/storage=enabled
+	tilt --port $(TILT_PORT) up
 
-start: network
-	docker run -d --name=$(NAME) --network=$(NETWORK) $(VOLUMES) $(ENVIRONMENT) -p 127.0.0.1:$(PORT):$(PORT) --expose=$(PORT) $(ACCOUNT)/$(IMAGE):$(VERSION)
-
-stop:
-	docker rm -f $(NAME)
+down:
+	kubectx docker-desktop
+	tilt down
 
 push:
 	docker push $(ACCOUNT)/$(IMAGE):$(VERSION)
@@ -43,9 +44,6 @@ remove:
 	-kubectl delete ns $(NAMESPACE)
 
 reset: remove install
-
-forward:
-	kubectl -n $(NAMESPACE) port-forward service/db $(PORT):$(PORT)
 
 tag:
 	-git tag -a "v$(VERSION)" -m "Version $(VERSION)"
