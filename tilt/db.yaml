@@ -6,8 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      volumes:
-      - name: mysql
       containers:
       - name: mysql
         image: mysql-klot-io
