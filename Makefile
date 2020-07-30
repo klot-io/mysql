@@ -2,7 +2,6 @@ ACCOUNT=klotio
 IMAGE=mysql
 VERSION?=0.3
 NAME=$(IMAGE)-$(ACCOUNT)
-NAMESPACE=mysql
 VOLUMES=-v ${PWD}/data:/var/lib/mysql
 ENVIRONMENT=-e MYSQL_ALLOW_EMPTY_PASSWORD='yes'
 TILT_PORT=23306
@@ -33,7 +32,6 @@ push:
 	docker push $(ACCOUNT)/$(IMAGE):$(VERSION)
 
 install:
-	-kubectl create ns $(NAMESPACE)
 	kubectl create -f kubernetes/db.yaml
 
 update:
@@ -41,7 +39,6 @@ update:
 
 remove:
 	-kubectl delete -f kubernetes/db.yaml
-	-kubectl delete ns $(NAMESPACE)
 
 reset: remove install
 
