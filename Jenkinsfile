@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
                 sh 'make build'
             }
         }
-        stage('Push') {
+        stage('push') {
             when {
                 branch 'master'
             }
